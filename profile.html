@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>User Profile</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Glass Card */
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  padding: 25px;
+  border-radius: 15px;
+  width: 320px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+/* Name */
+h2 {
+  margin-bottom: 15px;
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+/* Info Rows */
+.info {
+  background: rgba(255,255,255,0.2);
+  margin: 8px 0;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid white;
+  text-align: left;
+  font-size: 16px;
+  box-shadow: 0px 0px 5px black;
+
+}
+
+/* Labels */
+.label {
+  font-weight: bold;
+  opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2 id="name"></h2>
+
+  <div class="info">
+    <span class="label">Age:</span> <span id="age"></span>
+  </div>
+
+  <div class="info">
+    <span class="label">Address:</span> <span id="address"></span>
+  </div>
+
+  <div class="info">
+    <span class="label">DOB:</span> <span id="dob"></span>
+  </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+document.getElementById("name").textContent = params.get("name") || "Unknown User";
+document.getElementById("age").textContent = params.get("age") || "-";
+document.getElementById("address").textContent = params.get("address") || "-";
+document.getElementById("dob").textContent = params.get("dob") || "-";
+</script>
+
+</body>
+</html>

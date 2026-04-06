@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QR Generator</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main Card */
+.container {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+  box-shadow: 0px 0px 10px black;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0,123,255,0.4);
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0056b3;
+  box-shadow: 0px 0px 11px cyan;
+}
+
+/* QR Code Section */
+#qrcode {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#qrcode canvas,
+#qrcode img {
+  border: 5px solid #f1f1f1;
+  border-radius: 10px;
+  padding: 5px;
+  background: white;
+  box-shadow: 0px 4px 10px black;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>QR Generator</h2>
+
+  <input id="name" placeholder="Name">
+  <input id="age" placeholder="Age">
+  <input id="address" placeholder="Address">
+  <input id="dob" type="date">
+
+  <button onclick="generateQR()">Generate QR</button>
+
+  <!-- QR always centered below -->
+  <div id="qrcode"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+function generateQR() {
+  const name = document.getElementById("name").value;
+  const age = document.getElementById("age").value;
+  const address = document.getElementById("address").value;
+  const dob = document.getElementById("dob").value;
+
+  if (!name || !age || !address || !dob) {
+    alert("Fill all fields!");
+    return;
+  }
+
+  // 🔥 CHANGE THIS AFTER DEPLOYMENT
+  const baseURL = "https://YOUR_USERNAME.github.io/qr-project/profile.html";
+
+  const url = baseURL + 
+    "?name=" + encodeURIComponent(name) +
+    "&age=" + encodeURIComponent(age) +
+    "&address=" + encodeURIComponent(address) +
+    "&dob=" + encodeURIComponent(dob);
+
+  const qrContainer = document.getElementById("qrcode");
+  qrContainer.innerHTML = "";
+
+  new QRCode(qrContainer, {
+    text: url,
+    width: 200,
+    height: 200
+  });
+}
+</script>
+
+</body>
+</html>
